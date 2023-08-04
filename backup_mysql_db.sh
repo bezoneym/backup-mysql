@@ -14,7 +14,7 @@ BACKUP_FILE="${BACKUP_DIR}/backup_$(date +%Y%m%d%H%M%S).sql"
 # Создание резервной копии базы данных MySQL
 mysqldump ${OPTS} -u ${DB_USER} -p${DB_PASSWORD} ${DB_NAME} > ${BACKUP_FILE}
 
-# Проверка целостности резервной копии (не отменяет необходимости проверки этих дампов на возможность реального восстановления из них)
+# Проверка целостности резервной копии
 BEGIN=`head -n 1 ${BACKUP_FILE} | grep ^'-- MySQL dump' | wc -l`
 END=`tail -n 1 ${BACKUP_FILE} | grep ^'-- Dump completed' | wc -l`
 if [ "$BEGIN" == "1" ];then
